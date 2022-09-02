@@ -1,4 +1,4 @@
-package arrayAndList.bj11660;
+package intervalSum.bj11660;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
