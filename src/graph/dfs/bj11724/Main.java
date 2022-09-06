@@ -1,4 +1,4 @@
-package dfs.bj11724;
+package graph.dfs.bj11724;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

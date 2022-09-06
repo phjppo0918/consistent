@@ -1,4 +1,4 @@
-package dfs.bj2023;
+package graph.dfs.bj2023;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
