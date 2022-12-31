@@ -1,4 +1,4 @@
-package dp.bj14501;
+package org.example.dp.bj14501;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
