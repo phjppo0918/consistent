@@ -53,8 +53,6 @@ public class Main {
         }
     }
 
-
-
     private static void setInOrder(List<String> list, String head) {
         if (!graph.get(head).left.equals(".")) {
             setInOrder(list, graph.get(head).left);
