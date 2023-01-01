@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String [] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder result = new StringBuilder();
 
@@ -17,16 +19,19 @@ public class Main {
         int strSize = Integer.parseInt(st.nextToken());
         int testSize = Integer.parseInt(st.nextToken());
 
-        Node root = new Node();
-
+        Set<String> set = new HashSet<>();
         for (int i = 0; i < strSize; i++) {
-            char[] arr = br.readLine().toCharArray();
-
-
+            set.add(br.readLine());
         }
 
+        int count = 0;
+        for (int i = 0; i < testSize; i++) {
+            if (set.contains(br.readLine())) {
+                count++;
+            }
+        }
 
-
+        result.append(count);
 
         bw.write(result.toString());
 
@@ -34,9 +39,4 @@ public class Main {
         br.close();
         bw.close();
     }
-}
-
-class Node {
-    Node arr[] = new Node[26];
-    boolean isEnd;
 }
