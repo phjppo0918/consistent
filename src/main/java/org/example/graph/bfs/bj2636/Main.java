@@ -13,7 +13,6 @@ public class Main {
     private static final int OUT_SIDE = -1;
     private static final int MELT = -2;
     private static List<Pair> resentMelt;
-    private static List<Pair> beforeMelt;
     private static int row;
     private static int col;
 
@@ -50,14 +49,13 @@ public class Main {
                 break;
             }
 
-            beforeMelt = new ArrayList<>(resentMelt);
             count++;
             resentMelt.forEach(p -> {
                 graph[p.x][p.y] = 0;
                 checkOutSide(p.x, p.y);
             });
         }
-        result.append(count).append("\n").append(beforeMelt.size());
+        result.append(count).append("\n");
 
         bw.write(result.toString());
 
@@ -82,7 +80,20 @@ public class Main {
     }
 
     private static void checkMelt(int x, int y) {
-        if (graph[x - 1][y] == OUT_SIDE || graph[x + 1][y] == OUT_SIDE || graph[x][y - 1] == OUT_SIDE || graph[x][y + 1] == OUT_SIDE) {
+        int meltPoint = 0;
+        if (graph[x - 1][y] == OUT_SIDE) {
+            meltPoint++;
+        }
+        if (graph[x + 1][y] == OUT_SIDE) {
+            meltPoint++;
+        }
+        if(graph[x][y - 1] == OUT_SIDE) {
+            meltPoint++;
+        }
+        if(graph[x][y + 1] == OUT_SIDE) {
+            meltPoint++;
+        }
+        if(meltPoint >=2) {
             graph[x][y] = MELT;
             resentMelt.add(new Pair(x, y));
         }
