@@ -1,4 +1,4 @@
-package org.example.graph.bfs.bj1697;
+package org.example.graph.bfs.bj12851;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,8 +19,11 @@ public class Main {
         int start = Integer.parseInt(st.nextToken());
         int finish = Integer.parseInt(st.nextToken());
         createGraph();
-        bfs(start, finish);
-        result.append(visitCount[finish]);
+        int answer = bfs(start, finish);
+        if (start == finish) {
+            answer++;
+        }
+        result.append(visitCount[finish]).append("\n").append(answer);
 
         bw.write(result.toString());
 
@@ -28,6 +31,7 @@ public class Main {
         br.close();
         bw.close();
     }
+
     private static void createGraph() {
         for (int i = 0; i <=100_000; i++) {
             graph[i] = new ArrayList<>();
@@ -44,10 +48,10 @@ public class Main {
             graph[i].add(i+1);
             graph[i+1].add(i);
         }
-        graph[100_000].add(99_999);
     }
-    private static void bfs(int start, int finish) {
+    public static int bfs(int start, int finish) {
         isVisit[start] = true;
+        int answerCount = 0;
         Queue<Integer> queue = new LinkedList<>();
         queue.add(start);
         while (!queue.isEmpty()) {
@@ -56,12 +60,17 @@ public class Main {
                 break;
             }
             for(Integer i : graph[now]) {
-                if(!isVisit[i]) {
+                if(!isVisit[i] || visitCount[now] + 1 <= visitCount[i]) {
+                    if(i == finish) {
+                       answerCount++;
+                    }
                     visitCount[i] = visitCount[now] + 1;
                     isVisit[i] = true;
                     queue.add(i);
                 }
             }
         }
+
+        return answerCount;
     }
 }
