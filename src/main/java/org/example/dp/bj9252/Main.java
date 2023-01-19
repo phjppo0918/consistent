@@ -1,4 +1,4 @@
-package org.example.dp.bj9251;
+package org.example.dp.bj9252;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -46,10 +46,8 @@ public class Main {
         }
         Collections.reverse(ansReverse);
         sb.append(answer).append("\n");
-        ansReverse.forEach(c -> {
-            sb.append(c);
-            sb.append(" ");
-        });
+        ansReverse.forEach(sb::append);
+
         bw.write(sb.toString());
 
         bw.flush();
