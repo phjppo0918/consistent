@@ -33,6 +33,7 @@ public class Main {
             }
             size++;
         }
+
         if(ans.isEmpty()) {
             sb.append(-1 );
         }else {
