@@ -10,10 +10,10 @@ import java.util.StringTokenizer;
 import java.util.TreeSet;
 
 public class Main {
-    public static void main(String [] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
-    
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
@@ -29,7 +29,7 @@ public class Main {
             map.put(no, level);
         }
         int commandSize = Integer.parseInt(br.readLine());
-        for (int i = 0; i < commandSize ; i++) {
+        for (int i = 0; i < commandSize; i++) {
             st = new StringTokenizer(br.readLine());
             String command = st.nextToken();
             switch (command) {
@@ -42,9 +42,9 @@ public class Main {
                     break;
                 case "recommend":
                     int num = Integer.parseInt(st.nextToken());
-                    if(num == 1) {
+                    if (num == 1) {
                         sb.append(treeSet.last().num).append("\n");
-                    }else {
+                    } else {
                         sb.append(treeSet.first().num).append("\n");
                     }
                     break;
@@ -57,7 +57,7 @@ public class Main {
         }
 
         bw.write(sb.toString());
-    
+
         bw.flush();
         br.close();
         bw.close();
@@ -75,7 +75,7 @@ class Quest implements Comparable<Quest> {
 
     @Override
     public int compareTo(Quest o) {
-        if( o.level == this.level) {
+        if (o.level == this.level) {
             return this.num - o.num;
         }
         return this.level - o.level;
