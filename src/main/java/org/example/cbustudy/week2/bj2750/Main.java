@@ -36,5 +36,12 @@ public class Main {
         bw.flush();
         br.close();
         bw.close();
+
     }
+}
+
+
+class Member {
+    String name;
+    String password;
 }
