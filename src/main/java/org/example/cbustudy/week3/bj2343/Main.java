@@ -40,6 +40,7 @@ public class Main {
 
         while (lPiv <= rPiv) {
             int mid = (rPiv - lPiv) / 2 + lPiv;
+
             if (canInsert(mid)) {
                 answer = mid;
                 rPiv = mid - 1;
