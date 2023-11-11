@@ -1,14 +1,15 @@
-package org.example.swm.day1.q2;
+package org.example.swm.day3.q1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.StringTokenizer;
 
 public class Main {
-    
     public static void main(String [] args) throws Exception {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringBuilder sb = new StringBuilder();
@@ -18,34 +19,27 @@ public class Main {
     
         int size = Integer.parseInt(st.nextToken());
 
-        final int[] card = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-        int[] score = new int[size];
+        final int[] arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        int[] board = new int [1_000_001];
-        Arrays.fill(board, -1);
-        for (int i = 0; i < size; i++) {
-            board[card[i]] = i;
-        }
+        List<Integer> dp = new ArrayList<>();
 
+        dp.add(arr[0]);
 
-
-        for (int i = 1; i < 1_000_001; i++) {
-            if(board[i] != -1) {
-                int winner = board[i];
-
-                for (int j = 1; j*i <= 1_000_000; j++) {
-                    if(board[i*j] != -1) {
-                        score[winner]++;
-                        score[board[i*j]]--;
+        for (int i = 1; i < size; i++) {
+            if(arr[i] > dp.get(dp.size() - 1)) {
+                dp.add(arr[i]);
+            }else {
+                for (int j = 0; j < dp.size(); j++) {
+                    if(dp.get(j) >= arr[i]) {
+                        dp.set(j, arr[i]);
+                        break;
                     }
                 }
             }
         }
 
-        Arrays.stream(score).forEach(s -> sb.append(s).append(" "));
+        sb.append(dp.size());
 
-
-        
         bw.write(sb.toString());
     
         bw.flush();
@@ -53,4 +47,3 @@ public class Main {
         bw.close();
     }
 }
-
