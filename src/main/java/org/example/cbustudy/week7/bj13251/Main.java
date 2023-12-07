@@ -15,7 +15,8 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
 
         int cSize = Integer.parseInt(st.nextToken());
-        int[] counts = new int[cSize];
+        final int MAX = 52;
+        int[] counts = new int[MAX];
         int total = 0;
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < cSize; i++) {
@@ -24,12 +25,20 @@ public class Main {
             total += next;
         }
 
-        double prob[] = new double[51];
+        double prob[] = new double[MAX];
         double answer = 0;
+        int target = Integer.parseInt(br.readLine());
 
-
-
-        final int pickCount = Integer.parseInt(br.readLine());
+        for (int i=0;i<cSize;i++) {
+            if(counts[i] >= target) {
+                prob[i] = 1;
+                for (int j = 0; j < target; j++) {
+                    prob[i] *= (double)( counts[i] - j) / (total - j);
+                }
+                answer += prob[i];
+            }
+        }
+        sb.append(answer);
 
 
 
