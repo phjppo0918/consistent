@@ -7,8 +7,7 @@ import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int count = 0;
-    static int[][] graph;
+    static int[] graph;
     static int size;
 
     public static void main(String[] args) throws Exception {
@@ -20,7 +19,9 @@ public class Main {
 
         size = Integer.parseInt(st.nextToken());
 
-        graph = new int[size][size];
+        graph = new int[size];
+
+        sb.append(back(0));
 
 
         bw.write(sb.toString());
@@ -30,34 +31,28 @@ public class Main {
         bw.close();
     }
 
-    static int back(int x, int y, int id) {
-        if (graph[x][y] == 0) {
-            graph[x][y] = id;
-            count++;
-            for (int i = x + 1; i < size; i++) {
-                graph[i][y] = id;
-            }
-            for (int i = y + 1; i < size; i++) {
-                graph[x][i] = id;
-            }
-            int xx = x + 1;
-            int ly = y - 1;
-            int ry = y + 1;
-
-            while (xx < size) {
-                if(ly >=0) {
-                    graph[xx][ly] = id;
-                }
-                if(ry < size) {
-                    graph[xx][ry] = id;
-                }
-                xx++;
-                ly--;
-                ry++;
-            }
-
-            
-
+    static int back(int dep) {
+        if (dep == size) {
+            return 1;
         }
+        int answer = 0;
+
+        for (int i = 1; i <= size; i++) {
+            boolean isCan = true;
+            for (int j = dep - 1; j >= 0; j--) {
+                if (graph[j] == i || dep - j == Math.abs(i - graph[j])) {
+                    isCan = false;
+                    break;
+                }
+            }
+            if (!isCan) {
+                continue;
+            }
+            graph[dep] = i;
+            answer += back(dep + 1);
+            graph[dep] = 0;
+        }
+
+        return answer;
     }
 }
